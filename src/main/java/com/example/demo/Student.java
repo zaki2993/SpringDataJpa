@@ -7,9 +7,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
-import jdk.internal.foreign.abi.fallback.FallbackLinker;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "students",
+uniqueConstraints = {
+@UniqueConstraint(
+name = "uk_users_email",
+columnNames = "email")}
+)
 public class Student {
   @Id
   @SequenceGenerator(
@@ -27,7 +34,7 @@ public class Student {
   private String firstName;
   @Column(name = "last_name",nullable = false,columnDefinition = "TEXT")
   private String lastName;
-  @Column(name = "email",nullable = false,columnDefinition = "TEXT",unique = true)
+  @Column(name = "email",nullable = false,columnDefinition = "TEXT")
   private String email;
   @Column(name = "age")
   private Integer age;
